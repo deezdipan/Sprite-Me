@@ -1,0 +1,47 @@
+<!-- Share trigger button -->
+<button class="share-trigger" (click)="share()" [disabled]="sharing">
+  <mat-icon>ios_share</mat-icon>
+  {{ sharing ? 'Generating…' : 'Share My Stats' }}
+</button>
+
+<!-- The card that gets screenshotted — rendered off-screen -->
+<div class="card-wrapper">
+  <div class="share-card" #cardRef>
+
+    <div class="card-header">
+      <img src="assets/sprite-can.png" alt="Sprite" class="card-logo" />
+      <div class="card-brand">
+        <span class="card-title">Sprite-Me</span>
+        <span class="card-date">{{ todayDate }}</span>
+      </div>
+    </div>
+
+    <div class="card-name">
+      {{ profileService.profile()?.name ?? 'Sprite Fan' }}'s Weekly Wrap
+    </div>
+
+    <div class="card-stats">
+      <div class="card-stat">
+        <span class="card-stat-value">{{ weekOz | number:'1.0-1' }}</span>
+        <span class="card-stat-label">oz this week</span>
+      </div>
+      <div class="card-divider"></div>
+      <div class="card-stat">
+        <span class="card-stat-value">{{ weekDrinks }}</span>
+        <span class="card-stat-label">drinks logged</span>
+      </div>
+      <div class="card-divider"></div>
+      <div class="card-stat">
+        <span class="card-stat-value">{{ drinkLog.allTimeCount() }}</span>
+        <span class="card-stat-label">all-time total</span>
+      </div>
+    </div>
+
+    <div class="card-fave">
+      {{ containerEmoji }} Favourite: <strong>{{ topContainer }}</strong>
+    </div>
+
+    <div class="card-footer">sprite-me.vercel.app</div>
+
+  </div>
+</div>

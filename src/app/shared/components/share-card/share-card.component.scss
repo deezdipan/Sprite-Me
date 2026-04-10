@@ -1,0 +1,156 @@
+@use '../../../../styles/variables' as *;
+
+// — Share Button —
+.share-trigger {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  background: transparent;
+  border: 1px solid $sprite-border;
+  color: $sprite-white;
+  border-radius: $radius-pill;
+  padding: $space-sm $space-md;
+  font-family: $font-body;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  width: 100%;
+  justify-content: center;
+
+  mat-icon {
+    font-size: 1.1rem;
+    height: 1.1rem;
+    width: 1.1rem;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: $sprite-green;
+    color: $sprite-green;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// — Off-screen wrapper so card doesn't show in UI —
+.card-wrapper {
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  pointer-events: none;
+}
+
+// — The actual card that gets screenshotted —
+.share-card {
+  width: 360px;
+  background: #0F1F0F;
+  border: 2px solid $sprite-green;
+  border-radius: 20px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: $font-body;
+  box-shadow: 0 0 60px rgba(29, 185, 84, 0.25);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-logo {
+  width: 44px;
+  height: auto;
+}
+
+.card-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card-title {
+  font-family: $font-display;
+  font-size: 1.6rem;
+  color: $sprite-green;
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+
+.card-date {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.06em;
+}
+
+.card-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $sprite-white;
+  border-bottom: 1px solid rgba(29, 185, 84, 0.2);
+  padding-bottom: 16px;
+}
+
+.card-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.card-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-stat-value {
+  font-family: $font-display;
+  font-size: 2rem;
+  color: $sprite-green;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.card-stat-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+}
+
+.card-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(29, 185, 84, 0.2);
+  flex-shrink: 0;
+}
+
+.card-fave {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(29, 185, 84, 0.07);
+  border: 1px solid rgba(29, 185, 84, 0.15);
+  border-radius: $radius-pill;
+  padding: 8px 16px;
+  text-align: center;
+
+  strong {
+    color: $sprite-yellow;
+  }
+}
+
+.card-footer {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.25);
+  text-align: center;
+  letter-spacing: 0.1em;
+}
