@@ -13,8 +13,8 @@ serve(async (req) => {
   try {
     const { profile, stats } = await req.json()
 
-    const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY')
-    if (!GEMINI_API_KEY) throw new Error('Missing GEMINI_API_KEY')
+    const OPENROUTER_API_KEY = Deno.env.get('OPENROUTER_API_KEY')
+    if (!OPENROUTER_API_KEY) throw new Error('Missing OPENROUTER_API_KEY')
 
     const ageContext = profile.age
       ? `The user is ${profile.age} years old (${profile.gender}).`
@@ -52,28 +52,29 @@ Give a personalized, friendly insight (3–4 sentences max) about their Sprite i
 - Address them by name if available: ${profile.name || 'there'}
 Do NOT use markdown formatting or bullet points. Just plain conversational text.`
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.8,
-            maxOutputTokens: 200
-          }
-        })
-      }
-    )
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://sprite-me.vercel.app',
+        'X-Title': 'Sprite-Me'
+      },
+      body: JSON.stringify({
+        model: 'openai/gpt-oss-20b:free',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.8,
+        max_tokens: 200
+      })
+    })
 
-    const geminiData = await response.json()
+    const orData = await response.json()
 
     if (!response.ok) {
-      throw new Error(geminiData.error?.message || 'Gemini API error')
+      throw new Error(orData.error?.message || 'OpenRouter API error')
     }
 
-    const insight = geminiData.candidates?.[0]?.content?.parts?.[0]?.text ?? 'No insight generated.'
+    const insight = orData.choices?.[0]?.message?.content ?? 'No insight generated.'
 
     return new Response(
       JSON.stringify({ insight }),
