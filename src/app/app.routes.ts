@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
+import { profileGuard } from './core/guards/profile.guard';
 
 export const routes: Routes = [
   {
@@ -13,10 +14,16 @@ export const routes: Routes = [
       import('./features/auth/signup/signup.component').then(m => m.SignupComponent)
   },
   {
+    path: 'profile-setup',
+    loadComponent: () =>
+      import('./features/profile-setup/profile-setup.component').then(m => m.ProfileSetupComponent),
+    canActivate: [authGuard]
+  },
+  {
     path: 'dashboard',
     loadComponent: () =>
       import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
-    canActivate: [authGuard]
+    canActivate: [profileGuard]
   },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'dashboard' }

@@ -1,0 +1,50 @@
+<div class="setup-page">
+  <div class="setup-card">
+    <div class="setup-logo">
+      <img src="assets/sprite-can.png" alt="Sprite Can" class="logo-img" />
+    </div>
+    <h1 class="setup-title">One Last Thing</h1>
+    <p class="setup-subtitle">Tell us a bit about yourself so we can personalize your insights.</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="setup-form">
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Your Name</mat-label>
+        <input matInput formControlName="name" autocomplete="given-name" placeholder="e.g. Jerin" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Age</mat-label>
+        <input matInput type="number" formControlName="age" placeholder="e.g. 24" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="male">Male</mat-option>
+          <mat-option value="female">Female</mat-option>
+          <mat-option value="non-binary">Non-binary</mat-option>
+          <mat-option value="prefer-not-to-say">Prefer not to say</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      @if (error) {
+        <div class="error-msg">{{ error }}</div>
+      }
+
+      <button
+        mat-flat-button
+        class="setup-btn"
+        type="submit"
+        [disabled]="form.invalid || loading"
+      >
+        @if (loading) {
+          <mat-spinner diameter="20"></mat-spinner>
+        } @else {
+          Let's Go 🥤
+        }
+      </button>
+
+    </form>
+  </div>
+</div>

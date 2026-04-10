@@ -1,0 +1,55 @@
+<div class="insights-tab">
+  <h2 class="section-title">AI Insights</h2>
+  <p class="section-sub">Personalized analysis of your Sprite habits.</p>
+
+  @if (!isUnlocked()) {
+    <!-- Locked State -->
+    <div class="locked-card">
+      <div class="lock-icon">🔒</div>
+      <h3 class="lock-title">Almost There</h3>
+      <p class="lock-msg">
+        Log <strong>{{ drinksUntilUnlock() }} more drink{{ drinksUntilUnlock() === 1 ? '' : 's' }}</strong> to unlock your first AI insight.
+      </p>
+      <div class="lock-progress">
+        <div class="lock-progress-fill" [style.width.%]="(drinkLog.allTimeCount() / unlockThreshold) * 100"></div>
+      </div>
+      <p class="lock-count">{{ drinkLog.allTimeCount() }} / {{ unlockThreshold }}</p>
+    </div>
+  } @else {
+    <!-- Unlocked State -->
+    <div class="insight-card">
+      <div class="insight-header">
+        <span class="insight-badge">✨ Powered by Gemini</span>
+        <p class="insight-desc">
+          Based on your age, gender, and drink history — here's what the AI has to say.
+        </p>
+      </div>
+
+      @if (!insight && !loading) {
+        <button class="generate-btn" (click)="generateInsight()">
+          Generate My Insight
+        </button>
+      }
+
+      @if (loading) {
+        <div class="loading-state">
+          <mat-spinner diameter="36" color="primary"></mat-spinner>
+          <p>Analyzing your Sprite habits…</p>
+        </div>
+      }
+
+      @if (insight) {
+        <div class="insight-result">
+          <p class="insight-text">{{ insight }}</p>
+        </div>
+        <button class="regenerate-btn" (click)="generateInsight()" [disabled]="loading">
+          <mat-icon>refresh</mat-icon> Regenerate
+        </button>
+      }
+
+      @if (error) {
+        <div class="error-msg">{{ error }}</div>
+      }
+    </div>
+  }
+</div>

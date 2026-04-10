@@ -1,0 +1,195 @@
+@use '../../../../styles/variables' as *;
+
+.insights-tab {
+  padding: $space-lg;
+  padding-bottom: 100px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: $font-display;
+  font-size: 2rem;
+  color: $sprite-green;
+  letter-spacing: 0.08em;
+  margin-bottom: $space-xs;
+}
+
+.section-sub {
+  color: $sprite-muted;
+  font-size: 0.875rem;
+  margin-bottom: $space-lg;
+}
+
+// — Locked State —
+.locked-card {
+  background: $sprite-surface;
+  border: 1px solid $sprite-border;
+  border-radius: $radius-lg;
+  padding: $space-xl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-md;
+  text-align: center;
+}
+
+.lock-icon {
+  font-size: 2.5rem;
+}
+
+.lock-title {
+  font-family: $font-display;
+  font-size: 1.6rem;
+  color: $sprite-yellow;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.lock-msg {
+  color: $sprite-muted;
+  font-size: 0.9rem;
+  line-height: 1.6;
+
+  strong { color: $sprite-white; }
+}
+
+.lock-progress {
+  width: 100%;
+  height: 6px;
+  background: $sprite-border;
+  border-radius: $radius-pill;
+  overflow: hidden;
+}
+
+.lock-progress-fill {
+  height: 100%;
+  background: $sprite-green;
+  border-radius: $radius-pill;
+  transition: width 0.4s ease;
+}
+
+.lock-count {
+  font-size: 0.75rem;
+  color: $sprite-muted;
+  letter-spacing: 0.08em;
+}
+
+// — Unlocked State —
+.insight-card {
+  background: $sprite-surface;
+  border: 1px solid rgba(29, 185, 84, 0.3);
+  border-radius: $radius-lg;
+  padding: $space-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  box-shadow: $shadow-card;
+}
+
+.insight-header {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.insight-badge {
+  display: inline-block;
+  background: rgba(29, 185, 84, 0.12);
+  color: $sprite-green;
+  border: 1px solid rgba(29, 185, 84, 0.3);
+  border-radius: $radius-pill;
+  padding: 4px $space-md;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  width: fit-content;
+}
+
+.insight-desc {
+  color: $sprite-muted;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.generate-btn {
+  width: 100%;
+  height: 52px;
+  background: $sprite-green;
+  color: $sprite-black;
+  border: none;
+  border-radius: $radius-pill;
+  font-family: $font-body;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover {
+    background: $sprite-green-light;
+    box-shadow: $shadow-glow;
+    transform: translateY(-2px);
+  }
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-md;
+  padding: $space-lg 0;
+
+  p {
+    color: $sprite-muted;
+    font-size: 0.875rem;
+  }
+}
+
+.insight-result {
+  background: $sprite-surface-2;
+  border-radius: $radius-md;
+  padding: $space-lg;
+  border-left: 3px solid $sprite-green;
+}
+
+.insight-text {
+  color: $sprite-white;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.regenerate-btn {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  background: transparent;
+  border: 1px solid $sprite-border;
+  color: $sprite-muted;
+  border-radius: $radius-pill;
+  padding: $space-sm $space-md;
+  font-family: $font-body;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  width: fit-content;
+
+  &:hover:not(:disabled) {
+    border-color: $sprite-green;
+    color: $sprite-green;
+  }
+
+  mat-icon { font-size: 1rem; height: 1rem; width: 1rem; }
+}
+
+.error-msg {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  background: rgba(255, 107, 107, 0.1);
+  padding: $space-sm $space-md;
+  border-radius: $radius-sm;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
