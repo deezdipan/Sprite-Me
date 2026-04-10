@@ -1,5 +1,3 @@
 {
-  "buildCommand": "npx ng build --configuration production",
-  "outputDirectory": "dist/sprite-me/browser",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
