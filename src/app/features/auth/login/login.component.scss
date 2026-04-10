@@ -33,13 +33,19 @@
 }
 
 .auth-logo {
-  font-size: 3rem;
   animation: float 3s ease-in-out infinite;
 }
 
+.logo-img {
+  width: 80px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 16px rgba(29, 185, 84, 0.35));
+}
+
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-8px); }
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%       { transform: translateY(-12px) rotate(3deg); }
 }
 
 .auth-title {
