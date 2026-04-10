@@ -1,0 +1,106 @@
+@use '../../../../styles/variables' as *;
+
+.badges-section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.badges-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badges-title {
+  font-family: $font-display;
+  font-size: 1.4rem;
+  color: $sprite-white;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.badges-count {
+  font-size: 0.75rem;
+  color: $sprite-muted;
+  background: $sprite-surface-2;
+  padding: 3px $space-sm;
+  border-radius: $radius-pill;
+  letter-spacing: 0.06em;
+}
+
+.badges-grid {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.badge-card {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  padding: $space-md;
+  border-radius: $radius-md;
+  border: 1px solid $sprite-border;
+  transition: all 0.2s;
+  position: relative;
+
+  // — Earned —
+  &.earned {
+    background: rgba(29, 185, 84, 0.06);
+    border-color: rgba(29, 185, 84, 0.35);
+    box-shadow: 0 2px 12px rgba(29, 185, 84, 0.08);
+
+    .badge-name  { color: $sprite-white; }
+    .badge-emoji { filter: none; }
+  }
+
+  // — Locked —
+  &.locked {
+    background: $sprite-surface;
+    opacity: 0.5;
+
+    .badge-name  { color: $sprite-muted; }
+    .badge-emoji { filter: grayscale(1); }
+  }
+}
+
+.badge-emoji {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  width: 40px;
+  text-align: center;
+}
+
+.badge-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.badge-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.badge-desc {
+  font-size: 0.75rem;
+  color: $sprite-muted;
+  line-height: 1.4;
+}
+
+.badge-check {
+  width: 22px;
+  height: 22px;
+  background: $sprite-green;
+  color: $sprite-black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}

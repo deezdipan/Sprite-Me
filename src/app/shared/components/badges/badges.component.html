@@ -1,0 +1,25 @@
+<div class="badges-section">
+
+  <div class="badges-header">
+    <h3 class="badges-title">Achievements</h3>
+    <span class="badges-count">
+      {{ badgeService.earnedCount() }} / {{ badgeService.badges().length }}
+    </span>
+  </div>
+
+  <div class="badges-grid">
+    @for (badge of badgeService.badges(); track badge.id) {
+      <div class="badge-card" [class.earned]="badge.earned" [class.locked]="!badge.earned">
+        <div class="badge-emoji">{{ badge.earned ? badge.emoji : '🔒' }}</div>
+        <div class="badge-info">
+          <span class="badge-name">{{ badge.name }}</span>
+          <span class="badge-desc">{{ badge.description }}</span>
+        </div>
+        @if (badge.earned) {
+          <div class="badge-check">✓</div>
+        }
+      </div>
+    }
+  </div>
+
+</div>
