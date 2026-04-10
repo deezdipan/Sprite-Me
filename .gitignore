@@ -5,9 +5,6 @@ node_modules/
 dist/
 .angular/
 
-# Environment (contains credentials)
-src/environments/environment.ts
-src/environments/environment.prod.ts
 
 # OS
 .DS_Store
