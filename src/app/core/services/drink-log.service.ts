@@ -80,6 +80,19 @@ export class DrinkLogService {
     this.logs.update(prev => [data as DrinkLog, ...prev]);
   }
 
+  async updateLog(id: string, changes: { type: ContainerType; quantity: number }) {
+    const { data, error } = await this.sb
+      .from('drink_logs')
+      .update(changes)
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw error;
+
+    // Optimistically update in place
+    this.logs.update(prev => prev.map(l => l.id === id ? { ...l, ...changes } : l));
+  }
+
   async deleteLog(id: string) {
     const { error } = await this.sb
       .from('drink_logs')

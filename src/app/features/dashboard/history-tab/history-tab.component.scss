@@ -111,6 +111,16 @@
   color: $sprite-muted;
 }
 
+.edit-btn {
+  flex-shrink: 0;
+  color: rgba(245, 230, 66, 0.5) !important;
+  transition: color 0.15s;
+
+  &:hover:not(:disabled) {
+    color: $sprite-yellow !important;
+  }
+}
+
 .delete-btn {
   flex-shrink: 0;
   color: rgba(255, 107, 107, 0.6) !important;

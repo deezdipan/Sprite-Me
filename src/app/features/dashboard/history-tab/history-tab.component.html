@@ -31,6 +31,15 @@
               </div>
               <button
                 mat-icon-button
+                class="edit-btn"
+                (click)="openEditModal(log)"
+                [disabled]="deleting.has(log.id)"
+                aria-label="Edit entry"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
                 color="warn"
                 class="delete-btn"
                 (click)="delete(log.id)"
