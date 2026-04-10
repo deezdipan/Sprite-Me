@@ -1,49 +1,113 @@
-<div class="dashboard-shell">
-  <!-- Header -->
-  <header class="app-header">
-    <span class="logo">🥤 <span class="logo-text">Sprite-Me</span></span>
-    <div class="header-actions">
-      <span class="user-email">{{ auth.currentUser()?.email }}</span>
-      <button mat-icon-button (click)="signOut()" matTooltip="Sign out">
+<mat-sidenav-container class="dashboard-shell">
+
+  <!-- Mobile Drawer -->
+  <mat-sidenav
+    #drawer
+    [(opened)]="drawerOpen"
+    mode="over"
+    position="start"
+    class="mobile-drawer"
+  >
+    <div class="drawer-header">
+      <img src="assets/sprite-can.png" alt="Sprite" class="drawer-logo" />
+      <span class="drawer-title">Sprite-Me</span>
+    </div>
+
+    <div class="drawer-user">
+      <mat-icon class="drawer-user-icon">account_circle</mat-icon>
+      <div class="drawer-user-info">
+        <span class="drawer-user-name">{{ profileService.profile()?.name ?? '' }}</span>
+        <span class="drawer-user-email">{{ auth.currentUser()?.email }}</span>
+      </div>
+    </div>
+
+    <nav class="drawer-nav">
+      @for (item of navItems; track item.index) {
+        <button
+          class="drawer-nav-item"
+          [class.active]="selectedIndex === item.index"
+          (click)="navigateTo(item.index)"
+          matRipple
+        >
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+        </button>
+      }
+    </nav>
+
+    <div class="drawer-footer">
+      <button class="drawer-signout" (click)="signOut()" matRipple>
         <mat-icon>logout</mat-icon>
+        <span>Sign Out</span>
       </button>
     </div>
-  </header>
+  </mat-sidenav>
 
-  <!-- FAB -->
-  <button class="add-fab" (click)="openLogModal()" matRipple>
-    <mat-icon>add</mat-icon>
-    Add Drink
-  </button>
+  <!-- Main Content -->
+  <mat-sidenav-content>
+    <div class="content-shell">
 
-  <!-- Tabs -->
-  <mat-tab-group animationDuration="200ms" class="main-tabs" dynamicHeight>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="tab-icon">bar_chart</mat-icon> LOG
-      </ng-template>
-      <app-log-tab (openModal)="openLogModal()"></app-log-tab>
-    </mat-tab>
+      <!-- Header -->
+      <header class="app-header">
+        <!-- Hamburger: mobile only -->
+        <button mat-icon-button class="menu-btn" (click)="drawerOpen = !drawerOpen">
+          <mat-icon>menu</mat-icon>
+        </button>
 
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="tab-icon">today</mat-icon> TODAY
-      </ng-template>
-      <app-today-tab></app-today-tab>
-    </mat-tab>
+        <span class="logo">🥤 <span class="logo-text">Sprite-Me</span></span>
 
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="tab-icon">history</mat-icon> HISTORY
-      </ng-template>
-      <app-history-tab></app-history-tab>
-    </mat-tab>
+        <div class="header-actions">
+          <span class="user-email">{{ auth.currentUser()?.email }}</span>
+          <!-- Sign out: desktop only -->
+          <button mat-icon-button class="desktop-signout" (click)="signOut()" matTooltip="Sign out">
+            <mat-icon>logout</mat-icon>
+          </button>
+        </div>
+      </header>
 
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="tab-icon">auto_awesome</mat-icon> INSIGHTS
-      </ng-template>
-      <app-insights-tab></app-insights-tab>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+      <!-- FAB -->
+      <button class="add-fab" (click)="openLogModal()" matRipple>
+        <mat-icon>add</mat-icon>
+        Add Drink
+      </button>
+
+      <!-- Desktop Tabs -->
+      <mat-tab-group
+        animationDuration="200ms"
+        class="main-tabs desktop-tabs"
+        [(selectedIndex)]="selectedIndex"
+        dynamicHeight
+      >
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">bar_chart</mat-icon> LOG
+          </ng-template>
+          <app-log-tab (openModal)="openLogModal()"></app-log-tab>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">today</mat-icon> TODAY
+          </ng-template>
+          <app-today-tab></app-today-tab>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">history</mat-icon> HISTORY
+          </ng-template>
+          <app-history-tab></app-history-tab>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">auto_awesome</mat-icon> INSIGHTS
+          </ng-template>
+          <app-insights-tab></app-insights-tab>
+        </mat-tab>
+      </mat-tab-group>
+
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

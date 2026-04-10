@@ -1,13 +1,23 @@
 @use '../../../styles/variables' as *;
 
+// ─── Shell ───────────────────────────────────────────────
 .dashboard-shell {
   min-height: 100vh;
   background: $sprite-black;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+
+  ::ng-deep .mat-drawer-container {
+    background: $sprite-black;
+  }
 }
 
+.content-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: $sprite-black;
+}
+
+// ─── Header ──────────────────────────────────────────────
 .app-header {
   display: flex;
   align-items: center;
@@ -20,11 +30,22 @@
   z-index: 100;
 }
 
+.menu-btn {
+  display: none; // hidden on desktop
+  color: $sprite-white;
+  margin-right: $space-xs;
+
+  @media (max-width: 767px) {
+    display: flex;
+  }
+}
+
 .logo {
   display: flex;
   align-items: center;
   gap: $space-sm;
   font-size: 1.5rem;
+  flex: 1;
 }
 
 .logo-text {
@@ -50,6 +71,15 @@
   }
 }
 
+.desktop-signout {
+  display: flex;
+
+  @media (max-width: 767px) {
+    display: none; // sign out moves to drawer on mobile
+  }
+}
+
+// ─── FAB ─────────────────────────────────────────────────
 .add-fab {
   position: fixed;
   bottom: $space-xl;
@@ -79,6 +109,7 @@
   mat-icon { font-size: 1.2rem; height: 1.2rem; width: 1.2rem; }
 }
 
+// ─── Desktop Tabs ─────────────────────────────────────────
 .main-tabs {
   flex: 1;
 
@@ -99,6 +130,13 @@
   ::ng-deep .mdc-tab-indicator__content--underline {
     border-color: $sprite-green !important;
   }
+
+  // Hide tab header on mobile — navigation moves to drawer
+  @media (max-width: 767px) {
+    ::ng-deep .mat-mdc-tab-header {
+      display: none !important;
+    }
+  }
 }
 
 .tab-icon {
@@ -107,4 +145,151 @@
   width: 1rem;
   margin-right: 4px;
   vertical-align: middle;
+}
+
+// ─── Mobile Drawer ────────────────────────────────────────
+.mobile-drawer {
+  width: 280px;
+  background: $sprite-surface !important;
+  border-right: 1px solid $sprite-border !important;
+  display: flex;
+  flex-direction: column;
+
+  // Drawer only used on mobile
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  padding: $space-lg $space-lg $space-md;
+  border-bottom: 1px solid $sprite-border;
+}
+
+.drawer-logo {
+  width: 36px;
+  height: auto;
+  filter: drop-shadow(0 2px 8px rgba(29, 185, 84, 0.4));
+}
+
+.drawer-title {
+  font-family: $font-display;
+  font-size: 1.8rem;
+  color: $sprite-green;
+  letter-spacing: 0.1em;
+}
+
+.drawer-user {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-md $space-lg;
+  border-bottom: 1px solid $sprite-border;
+}
+
+.drawer-user-icon {
+  font-size: 2rem;
+  height: 2rem;
+  width: 2rem;
+  color: $sprite-muted;
+}
+
+.drawer-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.drawer-user-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: $sprite-white;
+}
+
+.drawer-user-email {
+  font-size: 0.72rem;
+  color: $sprite-muted;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.drawer-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: $space-md 0;
+  gap: $space-xs;
+}
+
+.drawer-nav-item {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  padding: 14px $space-lg;
+  background: transparent;
+  border: none;
+  color: $sprite-muted;
+  font-family: $font-body;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  border-radius: 0;
+  transition: color 0.15s, background 0.15s;
+
+  mat-icon {
+    font-size: 1.3rem;
+    height: 1.3rem;
+    width: 1.3rem;
+  }
+
+  &.active {
+    color: $sprite-green;
+    background: rgba(29, 185, 84, 0.08);
+    border-left: 3px solid $sprite-green;
+    font-weight: 700;
+  }
+
+  &:not(.active):hover {
+    color: $sprite-white;
+    background: rgba(255, 255, 255, 0.04);
+  }
+}
+
+.drawer-footer {
+  padding: $space-md $space-lg $space-lg;
+  border-top: 1px solid $sprite-border;
+}
+
+.drawer-signout {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  width: 100%;
+  padding: $space-sm $space-md;
+  background: transparent;
+  border: 1px solid $sprite-border;
+  border-radius: $radius-md;
+  color: $sprite-muted;
+  font-family: $font-body;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover {
+    border-color: #ff6b6b;
+    color: #ff6b6b;
+  }
+
+  mat-icon {
+    font-size: 1.1rem;
+    height: 1.1rem;
+    width: 1.1rem;
+  }
 }
