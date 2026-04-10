@@ -1,0 +1,52 @@
+<div class="history-tab">
+  <h2 class="section-title">History</h2>
+
+  @if (drinkLog.loading()) {
+    <div class="loading-state">
+      <mat-spinner diameter="40" color="primary"></mat-spinner>
+    </div>
+  } @else if (groupedLogs().length === 0) {
+    <div class="empty-state">
+      <span class="empty-icon">📋</span>
+      <p>No history yet.</p>
+      <p class="empty-sub">Start logging your Sprites!</p>
+    </div>
+  } @else {
+    <div class="history-list">
+      @for (group of groupedLogs(); track group.date) {
+        <div class="day-group">
+          <div class="day-header">
+            <h3 class="day-label">{{ group.date | date:'MMMM d, y' }}</h3>
+            <span class="day-total">{{ group.totalOz | number:'1.0-1' }} oz</span>
+          </div>
+
+          @for (log of group.logs; track log.id) {
+            <div class="log-row" [class.deleting]="deleting.has(log.id)">
+              <span class="log-emoji">{{ containerEmoji(log.type) }}</span>
+              <div class="log-info">
+                <span class="log-detail">{{ log.quantity }}× {{ log.type }}</span>
+                <span class="log-meta">
+                  {{ log.logged_at | date:'h:mm a' }} · {{ ozFor(log) | number:'1.0-1' }} oz
+                </span>
+              </div>
+              <button
+                mat-icon-button
+                color="warn"
+                class="delete-btn"
+                (click)="delete(log.id)"
+                [disabled]="deleting.has(log.id)"
+                aria-label="Delete entry"
+              >
+                @if (deleting.has(log.id)) {
+                  <mat-spinner diameter="18"></mat-spinner>
+                } @else {
+                  <mat-icon>delete_outline</mat-icon>
+                }
+              </button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

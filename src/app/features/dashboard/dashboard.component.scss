@@ -1,0 +1,110 @@
+@use '../../../styles/variables' as *;
+
+.dashboard-shell {
+  min-height: 100vh;
+  background: $sprite-black;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-md $space-lg;
+  background: $sprite-surface;
+  border-bottom: 1px solid $sprite-border;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  font-size: 1.5rem;
+}
+
+.logo-text {
+  font-family: $font-display;
+  font-size: 1.8rem;
+  color: $sprite-green;
+  letter-spacing: 0.08em;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+}
+
+.user-email {
+  font-size: 0.8rem;
+  color: $sprite-muted;
+  display: none;
+
+  @media (min-width: 480px) {
+    display: block;
+  }
+}
+
+.add-fab {
+  position: fixed;
+  bottom: $space-xl;
+  right: $space-lg;
+  z-index: 200;
+  background: $sprite-green;
+  color: $sprite-black;
+  border: none;
+  border-radius: $radius-pill;
+  padding: 14px $space-lg;
+  font-family: $font-body;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  box-shadow: $shadow-glow;
+  transition: transform 0.15s, box-shadow 0.15s;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 48px rgba(29, 185, 84, 0.45);
+  }
+
+  mat-icon { font-size: 1.2rem; height: 1.2rem; width: 1.2rem; }
+}
+
+.main-tabs {
+  flex: 1;
+
+  ::ng-deep .mat-mdc-tab-header {
+    background: $sprite-surface;
+    border-bottom: 1px solid $sprite-border;
+  }
+
+  ::ng-deep .mat-mdc-tab-label-container {
+    font-family: $font-display;
+    letter-spacing: 0.1em;
+  }
+
+  ::ng-deep .mdc-tab--active .mdc-tab__text-label {
+    color: $sprite-green !important;
+  }
+
+  ::ng-deep .mdc-tab-indicator__content--underline {
+    border-color: $sprite-green !important;
+  }
+}
+
+.tab-icon {
+  font-size: 1rem;
+  height: 1rem;
+  width: 1rem;
+  margin-right: 4px;
+  vertical-align: middle;
+}

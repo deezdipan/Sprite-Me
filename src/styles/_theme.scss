@@ -1,0 +1,20 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$sprite-primary: mat.define-palette(mat.$green-palette, 500, 300, 800);
+$sprite-accent:  mat.define-palette(mat.$yellow-palette, 400);
+$sprite-warn:    mat.define-palette(mat.$red-palette);
+
+$sprite-theme: mat.define-dark-theme((
+  color: (
+    primary: $sprite-primary,
+    accent:  $sprite-accent,
+    warn:    $sprite-warn,
+  ),
+  typography: mat.define-typography-config(
+    $font-family: 'DM Sans, sans-serif'
+  )
+));
+
+@include mat.all-component-themes($sprite-theme);

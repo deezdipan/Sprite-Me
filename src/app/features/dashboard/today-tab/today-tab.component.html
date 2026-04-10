@@ -1,0 +1,30 @@
+<div class="today-tab">
+  <h2 class="section-title">Today's Drinks</h2>
+  <p class="section-date">{{ todayDate | date:'EEEE, MMMM d' }}</p>
+
+  @if (drinkLog.todayLogs().length === 0) {
+    <div class="empty-state">
+      <span class="empty-icon">💧</span>
+      <p>No drinks logged today yet.</p>
+      <p class="empty-sub">Hit the green button to log your first Sprite!</p>
+    </div>
+  } @else {
+    <div class="log-list">
+      @for (log of drinkLog.todayLogs(); track log.id) {
+        <div class="log-row">
+          <span class="log-emoji">{{ containerEmoji(log.type) }}</span>
+          <div class="log-info">
+            <span class="log-detail">{{ log.quantity }}× {{ log.type }}</span>
+            <span class="log-oz">{{ ozFor(log.type, log.quantity) | number:'1.0-1' }} oz</span>
+          </div>
+          <span class="log-time">{{ log.logged_at | date:'h:mm a' }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="today-total">
+      <span class="total-label">Total Today</span>
+      <span class="total-value">{{ drinkLog.todayOz() | number:'1.0-1' }} oz</span>
+    </div>
+  }
+</div>

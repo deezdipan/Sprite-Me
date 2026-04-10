@@ -1,0 +1,35 @@
+@use 'variables' as *;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: $sprite-black;
+  color: $sprite-white;
+  font-family: $font-body;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: $font-display;
+  letter-spacing: 0.04em;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-mdc-card {
+  background: $sprite-surface !important;
+  border: 1px solid $sprite-border !important;
+}
+
+// Scrollbar
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: $sprite-surface; }
+::-webkit-scrollbar-thumb { background: $sprite-border; border-radius: $radius-pill; }
+::-webkit-scrollbar-thumb:hover { background: $sprite-green-dark; }

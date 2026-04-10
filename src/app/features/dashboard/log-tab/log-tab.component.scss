@@ -1,0 +1,111 @@
+@use '../../../../styles/variables' as *;
+
+.log-tab {
+  padding: $space-lg;
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-xl $space-lg;
+  background: $sprite-surface;
+  border: 1px solid $sprite-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  text-align: center;
+  margin-top: $space-lg;
+}
+
+.cta-icon {
+  font-size: 3.5rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50%       { transform: translateY(-10px) rotate(5deg); }
+}
+
+.cta-heading {
+  font-family: $font-display;
+  font-size: 2.5rem;
+  color: $sprite-green;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.cta-sub {
+  color: $sprite-muted;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.cta-btn {
+  margin-top: $space-sm;
+  background: $sprite-green;
+  color: $sprite-black;
+  border: none;
+  border-radius: $radius-pill;
+  padding: 14px $space-xl;
+  font-family: $font-body;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover {
+    background: $sprite-green-light;
+    box-shadow: $shadow-glow;
+    transform: translateY(-2px);
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-md;
+
+  .stat-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.stat-card {
+  background: $sprite-surface;
+  border: 1px solid $sprite-border;
+  border-radius: $radius-md;
+  padding: $space-lg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-xs;
+
+  &.highlight {
+    border-color: rgba(29, 185, 84, 0.4);
+    background: rgba(29, 185, 84, 0.05);
+  }
+}
+
+.stat-value {
+  font-family: $font-display;
+  font-size: 2.5rem;
+  color: $sprite-green;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $sprite-muted;
+}

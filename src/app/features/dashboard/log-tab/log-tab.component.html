@@ -1,0 +1,27 @@
+<div class="log-tab">
+  <!-- Quick Log CTA -->
+  <div class="cta-section">
+    <div class="cta-icon">🥤</div>
+    <h2 class="cta-heading">Thirsty?</h2>
+    <p class="cta-sub">Tap below to log your Sprite.</p>
+    <button class="cta-btn" (click)="openModal.emit()">
+      + Log a Drink
+    </button>
+  </div>
+
+  <!-- Today's Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="stat-value">{{ drinkLog.todayCount() }}</span>
+      <span class="stat-label">Today's Drinks</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">{{ drinkLog.todayOz() | number:'1.0-1' }}</span>
+      <span class="stat-label">Oz Today</span>
+    </div>
+    <div class="stat-card highlight">
+      <span class="stat-value">{{ drinkLog.allTimeCount() }}</span>
+      <span class="stat-label">All-Time Total</span>
+    </div>
+  </div>
+</div>

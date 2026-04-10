@@ -1,0 +1,42 @@
+<div class="dashboard-shell">
+  <!-- Header -->
+  <header class="app-header">
+    <span class="logo">🥤 <span class="logo-text">Sprite-Me</span></span>
+    <div class="header-actions">
+      <span class="user-email">{{ auth.currentUser()?.email }}</span>
+      <button mat-icon-button (click)="signOut()" matTooltip="Sign out">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <!-- FAB -->
+  <button class="add-fab" (click)="openLogModal()" matRipple>
+    <mat-icon>add</mat-icon>
+    Add Drink
+  </button>
+
+  <!-- Tabs -->
+  <mat-tab-group animationDuration="200ms" class="main-tabs" dynamicHeight>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">bar_chart</mat-icon> LOG
+      </ng-template>
+      <app-log-tab (openModal)="openLogModal()"></app-log-tab>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">today</mat-icon> TODAY
+      </ng-template>
+      <app-today-tab></app-today-tab>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">history</mat-icon> HISTORY
+      </ng-template>
+      <app-history-tab></app-history-tab>
+    </mat-tab>
+  </mat-tab-group>
+</div>
