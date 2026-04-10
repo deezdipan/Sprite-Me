@@ -9,6 +9,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { AuthService } from '../../core/services/auth.service';
 import { DrinkLogService } from '../../core/services/drink-log.service';
 import { ProfileService } from '../../core/services/profile.service';
+import { PwaService } from '../../core/services/pwa.service';
 import { LogModalComponent } from '../../shared/components/log-modal/log-modal.component';
 import { LogTabComponent } from './log-tab/log-tab.component';
 import { TodayTabComponent } from './today-tab/today-tab.component';
@@ -55,6 +56,7 @@ export class DashboardComponent implements OnInit {
     public auth: AuthService,
     public drinkLog: DrinkLogService,
     public profileService: ProfileService,
+    public pwa: PwaService,
     private dialog: MatDialog
   ) {}
 
